@@ -8,10 +8,18 @@ public class MessageService {
 
     public static void processMessage(Severity severity, String message, String... messages) {
 
-        ConsolePrinter.print(TimestampMessageDecorator.decorate(SeverityDecorator.decorate(severity,message)));
+        if (severity != null && message != null) {
+            ConsolePrinter.print(TimestampMessageDecorator.decorate(SeverityDecorator.decorate(severity,message)));
 
-        for (String messageItem: messages) {
-            ConsolePrinter.print(TimestampMessageDecorator.decorate(SeverityDecorator.decorate(severity,messageItem)));
+            for (String messageItem: messages) {
+
+                if (messageItem != null) {
+                    ConsolePrinter.print(TimestampMessageDecorator.decorate(SeverityDecorator.decorate(severity,messageItem)));
+                }
+            }
         }
+
+
+
     }
 }
