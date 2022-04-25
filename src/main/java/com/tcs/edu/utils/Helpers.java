@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Helpers {
 
-    public static boolean checkArrayContainItem(String[] arr, String str) {
+    public static boolean hasItemArrayItem(String[] arr, String str) {
         for (String arrItem: arr) {
             if (Objects.equals(arrItem, str)) {
                 return true;
@@ -15,14 +15,18 @@ public class Helpers {
 
     public static String[] getArrayAfterPreprocessing(String message, String[] arr) {
         String[] templateArr;
+        int index;
 
-        if (arr == null) {
-            templateArr = new String[1];
+        if (message == null) {
+            templateArr = new String[getLengthOfArrWithoutNulls(arr)];
+            index = 0;
         } else {
             templateArr = new String[getLengthOfArrWithoutNulls(arr) + 1];
+            index = 1;
+            templateArr[0] = message;
+        }
 
-            int index = 1;
-
+        if (arr != null) {
             for (String item:arr) {
                 if (item != null) {
                     templateArr[index] = item;
@@ -30,8 +34,6 @@ public class Helpers {
                 }
             }
         }
-        templateArr[0] = message;
-
         return templateArr;
     }
 
@@ -52,7 +54,7 @@ public class Helpers {
         int length = 0;
 
         for (int i = 0; i < arr.length; i++) {
-            if(!Helpers.checkArrayContainItem(template, arr[i])) {
+            if(!Helpers.hasItemArrayItem(template, arr[i])) {
                 length++;
                 template[i] = arr[i];
             }
@@ -65,7 +67,7 @@ public class Helpers {
         int index = 0;
 
         for (int i = 0; i < arr.length; i++) {
-            if(!Helpers.checkArrayContainItem(template, arr[i])) {
+            if(!Helpers.hasItemArrayItem(template, arr[i])) {
                 template[index] = arr[i];
                 index++;
             }
