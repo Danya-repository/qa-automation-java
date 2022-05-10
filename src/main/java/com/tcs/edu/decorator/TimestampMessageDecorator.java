@@ -1,5 +1,7 @@
 package com.tcs.edu.decorator;
 
+import com.tcs.edu.constants.Severity;
+import com.tcs.edu.ifaces.MessageDecorator;
 import java.time.Instant;
 
 /**
@@ -11,7 +13,7 @@ import java.time.Instant;
  * @version 1.0
  */
 
-public class TimestampMessageDecorator {
+public class TimestampMessageDecorator implements MessageDecorator {
 
     /**
      * Процедура {@link com.tcs.edu.decorator.TimestampMessageDecorator#decorate(String)} возвращает новую строку
@@ -19,7 +21,9 @@ public class TimestampMessageDecorator {
      * из метода {@link Instant#now()} и входящего параметра,
      * также процедура добавляет к новой строке специальный символ переноса если вызов процедуры является кратным
      * константе PAGE_SIZE.
-     * @param message ожидаемый на вход для исполнения процедуры, должен быть представлен типом String.
+     *
+     * @param severity ожидаемый на вход для исполнения процедуры, должен быть представлен типом Severity.
+     * @param body ожидаемый на вход для исполнения процедуры, должен быть представлен типом String.
      *
      * Побочные эффекты отсуствуют, процедура {@link com.tcs.edu.decorator.TimestampMessageDecorator#decorate(String)}
      * не изменяет входящие параметры.
@@ -33,15 +37,21 @@ public class TimestampMessageDecorator {
     static Integer messageCount = 0;
     static final Integer PAGE_SIZE = 2;
 
-    public static String decorate(String message) {
+    @Override
+    public String decorate(String body, Severity severity) {
+        return null;
+    }
+
+    @Override
+    public String decorate(String body) {
         messageCount++;
 
         if (messageCount % PAGE_SIZE == 0) {
-            final var decoratedMessage = String.format("%d %s %s\n---", messageCount, Instant.now(), message);
+            String decoratedMessage = String.format("%d %s %s\n---", messageCount, Instant.now(), body);
             return decoratedMessage;
         }
 
-        final var decoratedMessage = String.format("%d %s %s", messageCount, Instant.now(), message);
+        String decoratedMessage = String.format("%d %s %s", messageCount, Instant.now(), body);
         return decoratedMessage;
     }
 }

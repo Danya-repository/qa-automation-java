@@ -1,6 +1,7 @@
 package com.tcs.edu.decorator;
 
-import java.time.Instant;
+import com.tcs.edu.constants.Severity;
+import com.tcs.edu.ifaces.MessageDecorator;
 
 /**
  * Класс {@link SeverityDecorator} предназначен для хранения процедур по добавлению к входящим данным уровня серьёзности.
@@ -10,24 +11,29 @@ import java.time.Instant;
  * @version 1.0
  */
 
-public class SeverityDecorator {
+public class SeverityDecorator implements MessageDecorator {
 
     /**
-     * Процедура {@link com.tcs.edu.decorator.SeverityDecorator#decorate(Severity, String)} возвращает новую строку
+     * Процедура {@link com.tcs.edu.decorator.SeverityDecorator#decorate(String)} возвращает новую строку
      * состоящую из сообщения поступившего на вход в параметре message и уровня серьёзности поступившего на вход
      * в параметре severity
      *
-     * @param message ожидаемый на вход для исполнения процедуры, должен быть представлен типом String.
-     * @param severity ожидаемый на вход для исполнения процедуры, должен быть представлен типом Severity.
+     * @param body ожидаемый на вход для исполнения процедуры, должен быть представлен типом String.
      *
-     * Побочные эффекты отсуствуют, процедура {@link com.tcs.edu.decorator.SeverityDecorator#decorate(Severity, String)}
+     * Побочные эффекты отсуствуют, процедура {@link com.tcs.edu.decorator.SeverityDecorator#decorate(String)}
      * не изменяет входящие параметры.
      * При поступлении в качестве severity значения MINOR происходит возврат сообщения message и строки "()"
      * При поступлении в качестве severity значения REGULAR происходит возврат сообщения message и строки "(!)"
      * При поступлении в качестве severity значения MAJOR происходит возврат сообщения message и строки "(!!!)"
      */
 
-    public static String decorate(Severity severity, String message) {
+    @Override
+    public String decorate(String body) {
+        return null;
+    }
+
+    @Override
+    public String decorate(String body, Severity severity) {
         String severityString = null;
 
         switch (severity) {
@@ -44,6 +50,6 @@ public class SeverityDecorator {
                 severityString = "(not found severity)";
         }
 
-        return String.format("%s %s", message, severityString);
+        return String.format("%s %s", body, severityString);
     }
 }

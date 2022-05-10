@@ -1,34 +1,39 @@
 package com.tcs.edu.utils;
 
+import com.tcs.edu.domain.Message;
+
 import java.util.Objects;
 
 public class Helpers {
 
-    public static boolean hasItemArrayItem(String[] arr, String str) {
-        for (String arrItem: arr) {
-            if (Objects.equals(arrItem, str)) {
+    public boolean hasItemArrayItem(Message[] arr, Message item) {
+        for (Message arrItem: arr) {
+            if (arrItem == null) {continue;}
+
+            if (Objects.equals(arrItem.getSeverityLevel(), item.getSeverityLevel()) &&
+                    Objects.equals(arrItem.getBody(), item.getBody())) {
                 return true;
             }
         }
         return false;
     }
 
-    public static String[] getArrayAfterPreprocessing(String message, String[] arr) {
-        String[] templateArr;
+    public Message[] getArrayAfterPreprocessing(Message message, Message[] arrMessages) {
+        Message[] templateArr;
         int index;
 
         if (message == null) {
-            templateArr = new String[getLengthOfArrWithoutNulls(arr)];
+            templateArr = new Message[getLengthOfArrWithoutNulls(arrMessages)];
             index = 0;
         } else {
-            templateArr = new String[getLengthOfArrWithoutNulls(arr) + 1];
+            templateArr = new Message[getLengthOfArrWithoutNulls(arrMessages) + 1];
             index = 1;
             templateArr[0] = message;
         }
 
-        if (arr != null) {
-            for (String item:arr) {
-                if (item != null) {
+        if (arrMessages != null) {
+            for (Message item:arrMessages) {
+                if (item.getBody() != null && item.getSeverityLevel() != null) {
                     templateArr[index] = item;
                     index++;
                 }
@@ -37,24 +42,24 @@ public class Helpers {
         return templateArr;
     }
 
-    public static int getLengthOfArrWithoutNulls(String[] arr) {
-        if (arr == null) { return 0; }
-        int counter = arr.length;
+    public int getLengthOfArrWithoutNulls(Message[] arrMessages) {
+        if (arrMessages == null) { return 0; }
+        int counter = arrMessages.length;
 
-        for (String arrItem: arr) {
-            if (arrItem == null) {
+        for (Message arrItem: arrMessages) {
+            if (arrItem.getBody() == null || arrItem.getSeverityLevel() == null) {
                 counter--;
             }
         }
         return counter;
     }
 
-    public static int getLengthOfArrWithoutDoubles(String[] arr) {
-        String[] template = new String[arr.length];
+    public int getLengthOfArrWithoutDoubles(Message[] arr) {
+        Message[] template = new Message[arr.length];
         int length = 0;
 
         for (int i = 0; i < arr.length; i++) {
-            if(!Helpers.hasItemArrayItem(template, arr[i])) {
+            if(!hasItemArrayItem(template, arr[i])) {
                 length++;
                 template[i] = arr[i];
             }
@@ -62,12 +67,12 @@ public class Helpers {
         return length;
     }
 
-    public static String[] getArrayWithoutDoubles(String[] arr) {
-        String[] template = new String[getLengthOfArrWithoutDoubles(arr)];
+    public Message[] getArrayWithoutDoubles(Message[] arr) {
+        Message[] template = new Message[getLengthOfArrWithoutDoubles(arr)];
         int index = 0;
 
         for (int i = 0; i < arr.length; i++) {
-            if(!Helpers.hasItemArrayItem(template, arr[i])) {
+            if(!hasItemArrayItem(template, arr[i])) {
                 template[index] = arr[i];
                 index++;
             }
@@ -75,8 +80,8 @@ public class Helpers {
         return template;
     }
 
-    public static String[] getReverseArr(String[] arr) {
-        String[] template = new String[arr.length];
+    public Message[] getReverseArr(Message[] arr) {
+        Message[] template = new Message[arr.length];
         int index = 0;
 
         for (int i = arr.length - 1; i >= 0; i--) {
