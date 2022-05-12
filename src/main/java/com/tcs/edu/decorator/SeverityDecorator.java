@@ -11,29 +11,23 @@ import com.tcs.edu.ifaces.MessageDecorator;
  * @version 1.0
  */
 
-public class SeverityDecorator implements MessageDecorator {
+public class SeverityDecorator {
 
     /**
-     * Процедура {@link com.tcs.edu.decorator.SeverityDecorator#decorate(String)} возвращает новую строку
+     * Процедура {@link com.tcs.edu.decorator.SeverityDecorator#decorate(String, Severity)} возвращает новую строку
      * состоящую из сообщения поступившего на вход в параметре message и уровня серьёзности поступившего на вход
      * в параметре severity
      *
      * @param body ожидаемый на вход для исполнения процедуры, должен быть представлен типом String.
      *
-     * Побочные эффекты отсуствуют, процедура {@link com.tcs.edu.decorator.SeverityDecorator#decorate(String)}
+     * Побочные эффекты отсуствуют, процедура {@link com.tcs.edu.decorator.SeverityDecorator#decorate(String, Severity)}
      * не изменяет входящие параметры.
      * При поступлении в качестве severity значения MINOR происходит возврат сообщения message и строки "()"
      * При поступлении в качестве severity значения REGULAR происходит возврат сообщения message и строки "(!)"
      * При поступлении в качестве severity значения MAJOR происходит возврат сообщения message и строки "(!!!)"
      */
 
-    @Override
-    public String decorate(String body) {
-        return null;
-    }
-
-    @Override
-    public String decorate(String body, Severity severity) {
+    public static String decorate(String body, Severity severity) {
         String severityString = null;
 
         switch (severity) {

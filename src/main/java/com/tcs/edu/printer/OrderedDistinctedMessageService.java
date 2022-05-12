@@ -15,24 +15,15 @@ import static com.tcs.edu.utils.Helpers.*;
 public class OrderedDistinctedMessageService implements MessageService {
 
     private MessageDecorator timeDecorator;
-    private MessageDecorator severityDecorator;
     private Printer consolePrinter;
 
     public OrderedDistinctedMessageService() {
         this.timeDecorator = new TimestampMessageDecorator();
-        this.severityDecorator = new SeverityDecorator();
         this.consolePrinter = new ConsolePrinter();
     }
 
     public OrderedDistinctedMessageService(MessageDecorator timeDecorator, Printer printer) {
         this.timeDecorator = timeDecorator;
-        this.severityDecorator = new SeverityDecorator();
-        this.consolePrinter = printer;
-    }
-
-    public OrderedDistinctedMessageService(MessageDecorator timeDecorator, MessageDecorator severityDecorator, Printer printer) {
-        this.timeDecorator = timeDecorator;
-        this.severityDecorator = severityDecorator;
         this.consolePrinter = printer;
     }
 
@@ -42,7 +33,7 @@ public class OrderedDistinctedMessageService implements MessageService {
         processArr = getArrayAfterPreprocessing(message, messages);
 
         for (Message messageItem: processArr) {
-            consolePrinter.print(timeDecorator.decorate(severityDecorator.decorate(messageItem.getBody(),
+            consolePrinter.print(timeDecorator.decorate(SeverityDecorator.decorate(messageItem.getBody(),
                     messageItem.getSeverityLevel())));
         }
     }
