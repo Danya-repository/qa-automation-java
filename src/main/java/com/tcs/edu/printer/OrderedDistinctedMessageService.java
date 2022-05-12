@@ -11,42 +11,36 @@ import com.tcs.edu.utils.Helpers;
 
 import static com.tcs.edu.constants.Doubling.*;
 import static com.tcs.edu.constants.MessageOrder.*;
+import static com.tcs.edu.utils.Helpers.*;
 
 public class OrderedDistinctedMessageService implements MessageService {
 
-    private final MessageDecorator timeDecorator;
-    private final MessageDecorator severityDecorator;
-    private final Printer consolePrinter;
-    private final Helpers helpers;
+    private MessageDecorator timeDecorator;
+    private MessageDecorator severityDecorator;
+    private Printer consolePrinter;
 
     public OrderedDistinctedMessageService() {
         this.timeDecorator = new TimestampMessageDecorator();
         this.severityDecorator = new SeverityDecorator();
         this.consolePrinter = new ConsolePrinter();
-
-        this.helpers = new Helpers();
     }
 
     public OrderedDistinctedMessageService(MessageDecorator timeDecorator, Printer printer) {
         this.timeDecorator = timeDecorator;
         this.severityDecorator = new SeverityDecorator();
         this.consolePrinter = printer;
-
-        this.helpers = new Helpers();
     }
 
     public OrderedDistinctedMessageService(MessageDecorator timeDecorator, MessageDecorator severityDecorator, Printer printer) {
         this.timeDecorator = timeDecorator;
         this.severityDecorator = severityDecorator;
         this.consolePrinter = printer;
-
-        this.helpers = new Helpers();
     }
 
     @Override
     public void processMessage(Message message, Message... messages) {
         Message[] processArr;
-        processArr = helpers.getArrayAfterPreprocessing(message, messages);
+        processArr = getArrayAfterPreprocessing(message, messages);
 
         for (Message messageItem: processArr) {
             consolePrinter.print(timeDecorator.decorate(severityDecorator.decorate(messageItem.getBody(),
@@ -61,7 +55,7 @@ public class OrderedDistinctedMessageService implements MessageService {
         if (order == ASC) {
             processMessage(message, messages);
         } else if (order == DESC) {
-            processMessage(null, helpers.getReverseArr(helpers.getArrayAfterPreprocessing(message, messages)));
+            processMessage(null, getReverseArr(getArrayAfterPreprocessing(message, messages)));
         }
     }
 
@@ -75,7 +69,7 @@ public class OrderedDistinctedMessageService implements MessageService {
         } else if (doubling == DISTINCT) {
             processMessage( order,
                             null,
-                    helpers.getArrayWithoutDoubles(helpers.getArrayAfterPreprocessing(message, messages)));
+                    getArrayWithoutDoubles(getArrayAfterPreprocessing(message, messages)));
         }
     }
 }

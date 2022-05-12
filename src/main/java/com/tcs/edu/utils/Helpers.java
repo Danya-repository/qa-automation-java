@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class Helpers {
 
-    public boolean hasItemArrayItem(Message[] arr, Message item) {
+    public static boolean hasItemArrayItem(Message[] arr, Message item) {
         for (Message arrItem: arr) {
             if (arrItem == null) {continue;}
 
@@ -18,7 +18,7 @@ public class Helpers {
         return false;
     }
 
-    public Message[] getArrayAfterPreprocessing(Message message, Message[] arrMessages) {
+    public static Message[] getArrayAfterPreprocessing(Message message, Message[] arrMessages) {
         Message[] templateArr;
         int index;
 
@@ -42,7 +42,7 @@ public class Helpers {
         return templateArr;
     }
 
-    public int getLengthOfArrWithoutNulls(Message[] arrMessages) {
+    public static int getLengthOfArrWithoutNulls(Message[] arrMessages) {
         if (arrMessages == null) { return 0; }
         int counter = arrMessages.length;
 
@@ -54,7 +54,7 @@ public class Helpers {
         return counter;
     }
 
-    public int getLengthOfArrWithoutDoubles(Message[] arr) {
+    public static int getLengthOfArrWithoutDoubles(Message[] arr) {
         Message[] template = new Message[arr.length];
         int length = 0;
 
@@ -67,7 +67,7 @@ public class Helpers {
         return length;
     }
 
-    public Message[] getArrayWithoutDoubles(Message[] arr) {
+    public static Message[] getArrayWithoutDoubles(Message[] arr) {
         Message[] template = new Message[getLengthOfArrWithoutDoubles(arr)];
         int index = 0;
 
@@ -80,7 +80,7 @@ public class Helpers {
         return template;
     }
 
-    public Message[] getReverseArr(Message[] arr) {
+    public static Message[] getReverseArr(Message[] arr) {
         Message[] template = new Message[arr.length];
         int index = 0;
 
