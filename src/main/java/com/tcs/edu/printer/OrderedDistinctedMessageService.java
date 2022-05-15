@@ -12,7 +12,7 @@ import static com.tcs.edu.constants.Doubling.*;
 import static com.tcs.edu.constants.MessageOrder.*;
 import static com.tcs.edu.utils.Helpers.*;
 
-public class OrderedDistinctedMessageService implements MessageService {
+public class OrderedDistinctedMessageService extends ValidatedService implements MessageService {
 
     private MessageDecorator timeDecorator;
     private Printer consolePrinter;
@@ -29,6 +29,8 @@ public class OrderedDistinctedMessageService implements MessageService {
 
     @Override
     public void processMessage(Message message, Message... messages) {
+        super.isArgsValid(message, messages);
+
         Message[] processArr;
         processArr = getArrayAfterPreprocessing(message, messages);
 
@@ -40,7 +42,7 @@ public class OrderedDistinctedMessageService implements MessageService {
 
     @Override
     public void processMessage(MessageOrder order, Message message, Message... messages) {
-        if (order == null) { return; }
+        super.isArgsValid(order);
 
         if (order == ASC) {
             processMessage(message, messages);
@@ -52,12 +54,12 @@ public class OrderedDistinctedMessageService implements MessageService {
     @Override
     public void processMessage(MessageOrder order,
                                Doubling doubling, Message message, Message... messages) {
-        if (doubling == null) { return; }
+        super.isArgsValid(doubling);
 
         if (doubling == DOUBLES) {
             processMessage(order, message, messages);
         } else if (doubling == DISTINCT) {
-            processMessage( order,
+            processMessage(order,
                             null,
                     getArrayWithoutDoubles(getArrayAfterPreprocessing(message, messages)));
         }
