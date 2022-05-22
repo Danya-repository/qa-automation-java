@@ -23,21 +23,36 @@ public class Helpers {
         int index;
 
         if (message == null) {
-            templateArr = new Message[getLengthOfArrWithoutNulls(arrMessages)];
+            templateArr = new Message[arrMessages.length];
             index = 0;
         } else {
-            templateArr = new Message[getLengthOfArrWithoutNulls(arrMessages) + 1];
+            templateArr = new Message[arrMessages.length + 1];
             index = 1;
             templateArr[0] = message;
         }
 
         if (arrMessages != null) {
             for (Message item:arrMessages) {
-                if (item.getBody() != null && item.getSeverityLevel() != null) {
-                    templateArr[index] = item;
-                    index++;
-                }
+                templateArr[index] = item;
+                index++;
             }
+
+//        if (message == null) {
+//            templateArr = new Message[getLengthOfArrWithoutNulls(arrMessages)];
+//            index = 0;
+//        } else {
+//            templateArr = new Message[getLengthOfArrWithoutNulls(arrMessages) + 1];
+//            index = 1;
+//            templateArr[0] = message;
+//        }
+//
+//        if (arrMessages != null) {
+//            for (Message item:arrMessages) {
+//                if (item.getBody() != null && item.getSeverityLevel() != null) {
+//                    templateArr[index] = item;
+//                    index++;
+//                }
+//            }
         }
         return templateArr;
     }
