@@ -36,23 +36,6 @@ public class Helpers {
                 templateArr[index] = item;
                 index++;
             }
-
-//        if (message == null) {
-//            templateArr = new Message[getLengthOfArrWithoutNulls(arrMessages)];
-//            index = 0;
-//        } else {
-//            templateArr = new Message[getLengthOfArrWithoutNulls(arrMessages) + 1];
-//            index = 1;
-//            templateArr[0] = message;
-//        }
-//
-//        if (arrMessages != null) {
-//            for (Message item:arrMessages) {
-//                if (item.getBody() != null && item.getSeverityLevel() != null) {
-//                    templateArr[index] = item;
-//                    index++;
-//                }
-//            }
         }
         return templateArr;
     }
