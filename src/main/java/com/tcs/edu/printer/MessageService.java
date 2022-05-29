@@ -13,6 +13,7 @@ public class MessageService {
 
         String[] processArr;
         processArr = getArrayAfterPreprocessing(message, messages);
+        ConsolePrinter.print(TimestampMessageDecorator.decorate(SeverityDecorator.decorate(severity,message)));
 
         for (String messageItem: processArr) {
             ConsolePrinter.print(TimestampMessageDecorator.decorate(SeverityDecorator.decorate(severity,messageItem)));
