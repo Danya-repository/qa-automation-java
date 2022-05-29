@@ -1,7 +1,6 @@
 package com.tcs.edu.decorator;
 
 import com.tcs.edu.constants.Severity;
-import com.tcs.edu.ifaces.MessageDecorator;
 
 /**
  * Класс {@link SeverityDecorator} предназначен для хранения процедур по добавлению к входящим данным уровня серьёзности.
