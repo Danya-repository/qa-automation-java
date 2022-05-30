@@ -17,14 +17,7 @@ import static com.tcs.edu.utils.Helpers.*;
 
 public class DecoratingMessageService extends ValidatedService implements MessageService {
 
-    private MessageDecorator timeDecorator;
-    private Printer consolePrinter;
     private MessageRepository messageRepository = new HashMapMessageRepository();
-
-    public DecoratingMessageService() {
-        this.timeDecorator = new TimestampMessageDecorator();
-        this.consolePrinter = new ConsolePrinter();
-    }
 
     @Override
     public Message findByPrimaryKey(UUID key) {
@@ -32,7 +25,7 @@ public class DecoratingMessageService extends ValidatedService implements Messag
     }
 
     @Override
-    public void log(Message message, Message... messages) {
+    public void create(Message message, Message... messages) {
         try {
             super.isArgsValid(message, messages);
         } catch (IllegalArgumentException e) {

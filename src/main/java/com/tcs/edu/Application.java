@@ -16,9 +16,8 @@ class Application {
         Message m5 = new Message(MAJOR, "Hello world 5");
 
         MessageService service = new DecoratingMessageService();
-        service.log(m1, m2, m3, m4, m5);
+        service.create(m1, m2, m3, m4, m5);
 
-        System.out.println(m1.getId());
         System.out.println(service.findByPrimaryKey(m1.getId()));
 
         System.out.println(service.findAll());

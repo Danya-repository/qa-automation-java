@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public interface MessageService {
 
-    void log(Message message, Message... messages);
+    void create(Message message, Message... messages);
     Message findByPrimaryKey(UUID key);
     Collection<Message> findAll();
     Collection<Message> findBySeverity(Severity by);
