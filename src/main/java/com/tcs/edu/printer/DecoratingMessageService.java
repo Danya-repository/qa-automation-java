@@ -2,12 +2,9 @@ package com.tcs.edu.printer;
 
 import com.tcs.edu.constants.Severity;
 import com.tcs.edu.domain.Message;
-import com.tcs.edu.decorator.*;
 import com.tcs.edu.exceptions.LogException;
-import com.tcs.edu.ifaces.MessageDecorator;
 import com.tcs.edu.ifaces.MessageRepository;
 import com.tcs.edu.ifaces.MessageService;
-import com.tcs.edu.ifaces.Printer;
 import com.tcs.edu.state.HashMapMessageRepository;
 
 import java.util.Collection;
