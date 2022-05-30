@@ -1,6 +1,6 @@
 package com.tcs.edu.decorator;
 
-import java.time.Instant;
+import com.tcs.edu.constants.Severity;
 
 /**
  * Класс {@link SeverityDecorator} предназначен для хранения процедур по добавлению к входящим данным уровня серьёзности.
@@ -13,21 +13,20 @@ import java.time.Instant;
 public class SeverityDecorator {
 
     /**
-     * Процедура {@link com.tcs.edu.decorator.SeverityDecorator#decorate(Severity, String)} возвращает новую строку
+     * Процедура {@link com.tcs.edu.decorator.SeverityDecorator#decorate(String, Severity)} возвращает новую строку
      * состоящую из сообщения поступившего на вход в параметре message и уровня серьёзности поступившего на вход
      * в параметре severity
      *
-     * @param message ожидаемый на вход для исполнения процедуры, должен быть представлен типом String.
-     * @param severity ожидаемый на вход для исполнения процедуры, должен быть представлен типом Severity.
+     * @param body ожидаемый на вход для исполнения процедуры, должен быть представлен типом String.
      *
-     * Побочные эффекты отсуствуют, процедура {@link com.tcs.edu.decorator.SeverityDecorator#decorate(Severity, String)}
+     * Побочные эффекты отсуствуют, процедура {@link com.tcs.edu.decorator.SeverityDecorator#decorate(String, Severity)}
      * не изменяет входящие параметры.
      * При поступлении в качестве severity значения MINOR происходит возврат сообщения message и строки "()"
      * При поступлении в качестве severity значения REGULAR происходит возврат сообщения message и строки "(!)"
      * При поступлении в качестве severity значения MAJOR происходит возврат сообщения message и строки "(!!!)"
      */
 
-    public static String decorate(Severity severity, String message) {
+    public static String decorate(String body, Severity severity) {
         String severityString = null;
 
         switch (severity) {
@@ -44,6 +43,6 @@ public class SeverityDecorator {
                 severityString = "(not found severity)";
         }
 
-        return String.format("%s %s", message, severityString);
+        return String.format("%s %s", body, severityString);
     }
 }

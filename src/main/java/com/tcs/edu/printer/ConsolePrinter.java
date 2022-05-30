@@ -1,5 +1,7 @@
 package com.tcs.edu.printer;
 
+import com.tcs.edu.ifaces.Printer;
+
 /**
  * Класс {@link ConsolePrinter} используется для хранения методов и процедур, которые предназначены
  * для вывода данных в консоль.
@@ -8,7 +10,7 @@ package com.tcs.edu.printer;
  * @version 1.0
  */
 
-public class ConsolePrinter {
+public class ConsolePrinter implements Printer {
     /**
      * Процедура {@link com.tcs.edu.printer.ConsolePrinter#print(String)} прездназначена для
      * вывода в консоль поступающего на вход параметра.
@@ -17,7 +19,7 @@ public class ConsolePrinter {
      * Побочные эффекты отсуствуют, процедура {@link com.tcs.edu.printer.ConsolePrinter#print(String)}
      * не изменяет входящие параметры.
      */
-    public static void print(String message) {
+    public void print(String message) {
         System.out.println(message);
     }
 }

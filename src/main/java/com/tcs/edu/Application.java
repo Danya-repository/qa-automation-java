@@ -1,61 +1,25 @@
 package com.tcs.edu;
 
-import com.tcs.edu.printer.MessageService;
+import com.tcs.edu.domain.Message;
+import com.tcs.edu.ifaces.MessageService;
+import com.tcs.edu.printer.DecoratingMessageService;
 
-import static com.tcs.edu.decorator.Doubling.*;
-import static com.tcs.edu.decorator.Severity.*;
-import static com.tcs.edu.decorator.MessageOrder.*;
+import static com.tcs.edu.constants.Severity.*;
 
 class Application {
     public static void main(String[] args) {
-//        7 - 1
-//        MessageService.processMessage(MINOR, null);
-//        MessageService.processMessage(REGULAR, "Hello world", null, "Hello world");
-//        MessageService.processMessage(REGULAR, "Hello world", null);
-//        MessageService.processMessage(null, "Hello world");
-//        MessageService.processMessage(MINOR, "Hello world");
-//        MessageService.processMessage(MAJOR, "Hello world");
 
-//        7-2
-//        MessageService.processMessage(REGULAR,
-//                                     DESC,
-//                            "Hello world 1",
-//                           "Hello world 2", "Hello world 3", "Hello world 4",
-//                                     "Hello world 5", "Hello world 6");
+        Message m1 = new Message(REGULAR, "Hello world 1");
+        Message m2 = new Message(REGULAR, "Hello world 2");
+        Message m3 = new Message(REGULAR, "Hello world 3");
+        Message m4 = new Message(MINOR, "Hello world 4");
+        Message m5 = new Message(MAJOR, "Hello world 5");
 
-//        MessageService.processMessage(REGULAR,
-//                ASC,
-//                "Hello world 1",
-//                "Hello world 2", "Hello world 3", "Hello world 4",
-//                "Hello world 5", "Hello world 6");
+        MessageService service = new DecoratingMessageService();
+        service.create(m1, m2, m3, m4, m5);
 
-//         7-3
-//        MessageService.processMessage(REGULAR,
-//                                      ASC,
-//                                      DOUBLES,
-//                             "Hello world 1",
-//                            "Hello world 2", "Hello world 3", "Hello world 2",
-//                                                       "Hello world 5", "Hello world 2");
+        System.out.println(service.findByPrimaryKey(m1.getId()));
 
-//        MessageService.processMessage(REGULAR,
-//                DESC,
-//                DOUBLES,
-//                "Hello world 1",
-//                "Hello world 2", "Hello world 3", "Hello world 2",
-//                          "Hello world 5", "Hello world 2");
-//
-//        MessageService.processMessage(REGULAR,
-//                ASC,
-//                DISTINCT,
-//                "Hello world 1",
-//                "Hello world 2", "Hello world 3", "Hello world 2",
-//                "Hello world 5", "Hello world 2");
-//
-//        MessageService.processMessage(REGULAR,
-//                DESC,
-//                DISTINCT,
-//                "Hello world 1",
-//                "Hello world 2", "Hello world 3", "Hello world 2",
-//                "Hello world 5", "Hello world 2");
+        System.out.println(service.findAll());
     }
 }
