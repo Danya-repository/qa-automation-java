@@ -26,14 +26,14 @@ public class LogException extends RuntimeException {
     }
 
     public LogException(MessageOrder order, IllegalArgumentException e) {
-        super("Ошибка параметра order. " + e.getMessage(), e.getCause(), false, true);
+        super("Error argument order. " + e.getMessage(), e.getCause(), false, true);
     }
 
     public LogException(Doubling doubling, IllegalArgumentException e) {
-        super("Ошибка параметра doubling. " + e.getMessage(), e.getCause(), false, true);
+        super("Error argument doubling. " + e.getMessage(), e.getCause(), false, true);
     }
 
     public LogException(Message message, IllegalArgumentException e) {
-        super("Ошибка параметра message. " + e.getMessage(), e.getCause(), false, true);
+        super("Error argument message. " + e.getMessage(), e.getCause(), false, true);
     }
 }

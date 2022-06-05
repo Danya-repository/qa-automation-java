@@ -9,8 +9,8 @@ import static com.tcs.edu.utils.Helpers.getArrayAfterPreprocessing;
 public abstract class ValidatedService {
 
     public boolean isArgsValid(Message message, Message... messages) {
-        if (message == null && messages == null) {
-            throw new IllegalArgumentException("Parameters message and messages is null.");
+        if (message == null) {
+            throw new IllegalArgumentException("Parameters message is null.");
         }
         var arr = getArrayAfterPreprocessing(message, messages);
         for (Message messageItem: arr) {
