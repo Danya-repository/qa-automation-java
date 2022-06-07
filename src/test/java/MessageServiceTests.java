@@ -4,9 +4,12 @@ import com.tcs.edu.ifaces.MessageService;
 import com.tcs.edu.printer.DecoratingMessageService;
 import org.junit.jupiter.api.*;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import static com.tcs.edu.constants.Severity.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+
 
 public class MessageServiceTests {
 
@@ -28,8 +31,7 @@ public class MessageServiceTests {
                 new Message(REGULAR, "Hello world!"),
                 new Message(REGULAR, "Hello world!"));
 
-
-        assertThat(service.findAll().size()).isEqualTo(4);
+        assertThat(service.findAll().size(), is(4));
     }
 
     @Test
@@ -40,7 +42,7 @@ public class MessageServiceTests {
                        new Message(MINOR, "Hello world!"),
                        new Message(REGULAR, "Hello world!"));
 
-        assertThat(service.findBySeverity(REGULAR).size()).isEqualTo(2);
+        assertThat(service.findBySeverity(REGULAR).size(), is(2));
     }
 
     @Test
@@ -49,20 +51,19 @@ public class MessageServiceTests {
         Message m1 = new Message(REGULAR, "Hello world!");
         service.create(m1);
 
-        assertThat(service.findByPrimaryKey(m1.getId())).isEqualTo(m1);
+        assertThat(service.findByPrimaryKey(m1.getId()), is(m1));
     }
 
     @Test
     public void shouldReturnLogExceptionWhenMessageIsNull() {
-        Exception exception = Assertions.assertThrows(LogException.class, () -> service.create(null));
-        assertThat(exception.getMessage()).isEqualTo("Error argument message. Parameters message is null.");
+        Exception exception = assertThrows(LogException.class, () -> service.create(null));
+        assertThat(exception.getMessage(), is("Error argument message. Parameters message is null."));
     }
 
 
 
     @Nested
-    @DisplayName("Tests for check size" +
-            "")
+    @DisplayName("Tests for check size")
     class CheckSizeTest {
 
         private MessageService service = null;
@@ -82,21 +83,21 @@ public class MessageServiceTests {
         @DisplayName("Size is equal 1")
         void checkSizeIsEqualOneElementTest() {
             service.create(m1);
-            assertThat(service.findAll().size()).isEqualTo(1);
+            assertThat(service.findAll().size(), is(1));
         }
 
         @Test
         @DisplayName("Size is equal 2")
         void checkSizeIsEqualTwoElementTest() {
             service.create(m1, m2);
-            assertThat(service.findAll().size()).isEqualTo(2);
+            assertThat(service.findAll().size(), is(2));
         }
 
         @Test
         @DisplayName("Size is equal 3")
         void checkSizeIsEqualThreeElementTest() {
             service.create(m1, m2, m3);
-            assertThat(service.findAll().size()).isEqualTo(3);
+            assertThat(service.findAll().size(), is(3));
         }
     }
 }
