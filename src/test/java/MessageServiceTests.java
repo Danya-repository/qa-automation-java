@@ -6,10 +6,9 @@ import org.junit.jupiter.api.*;
 
 import static com.tcs.edu.constants.Severity.*;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
-
 
 public class MessageServiceTests {
 
@@ -60,8 +59,6 @@ public class MessageServiceTests {
         assertThat(exception.getMessage(), is("Error argument message. Parameters message is null."));
     }
 
-
-
     @Nested
     @DisplayName("Tests for check size")
     class CheckSizeTest {
@@ -83,21 +80,21 @@ public class MessageServiceTests {
         @DisplayName("Size is equal 1")
         void checkSizeIsEqualOneElementTest() {
             service.create(m1);
-            assertThat(service.findAll().size(), is(1));
+            assertThat(service.findAll(), hasSize(1));
         }
 
         @Test
         @DisplayName("Size is equal 2")
         void checkSizeIsEqualTwoElementTest() {
             service.create(m1, m2);
-            assertThat(service.findAll().size(), is(2));
+            assertThat(service.findAll(), hasSize(2));
         }
 
         @Test
         @DisplayName("Size is equal 3")
         void checkSizeIsEqualThreeElementTest() {
             service.create(m1, m2, m3);
-            assertThat(service.findAll().size(), is(3));
+            assertThat(service.findAll(), hasSize(3));
         }
     }
 }
