@@ -30,7 +30,7 @@ public class MessageServiceTests {
                 new Message(REGULAR, "Hello world!"),
                 new Message(REGULAR, "Hello world!"));
 
-        assertThat(service.findAll().size(), is(4));
+        assertThat(service.findAll(), hasSize(4));
     }
 
     @Test
@@ -41,7 +41,7 @@ public class MessageServiceTests {
                        new Message(MINOR, "Hello world!"),
                        new Message(REGULAR, "Hello world!"));
 
-        assertThat(service.findBySeverity(REGULAR).size(), is(2));
+        assertThat(service.findBySeverity(REGULAR), hasSize(2));
     }
 
     @Test
